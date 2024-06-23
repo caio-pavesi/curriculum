@@ -57,22 +57,22 @@
         {
             "label": "Criar e configurar ambiente virtual",
             "type": "shell",
-            "command": "python -m venv .venv; .venv/Scripts/activate; pip install -r requirements.txt",
+            "command": "python3 -m venv .venv; .venv/bin/activate; pip install -r requirements.txt",
         },
         {
             "label": "Configurar PYTHONPATH",
             "type": "shell",
-            "command": "New-Item -Path .venv/Lib/site-packages/main.pth -ItemType file -Value $(pwd) -Force;" // ? - Para evitar problemas com o PYTHONPATH e ter que adicionar o diretório do projeto manualmente, veja mais em https://stackoverflow.com/questions/10738919/how-do-i-add-a-path-to-pythonpath-in-virtualenv#:~:text=Add%20a%20comment-,7%20Answers,-Sorted%20by%3A
+            "command": "echo $(pwd) > .venv/lib/python3.12/site-packages/main.pth" // ? - Para evitar problemas com o PYTHONPATH e ter que adicionar o diretório do projeto manualmente, veja mais em https://stackoverflow.com/questions/10738919/how-do-i-add-a-path-to-pythonpath-in-virtualenv#:~:text=Add%20a%20comment-,7%20Answers,-Sorted%20by%3A
         },
         {
             "label": "Adicionar arquivo credentials.py",
             "type": "shell",
-            "command": "New-Item -Path 'app/Config/credentials.py' -ItemType 'file' -Value '\"\"\"\"\"\"\"\"\"Aqui devem ser colocadas todas as credenciais utilizadas no código para evitar vazamentos\"\"\"\"\"\"\"\"\"\n' -Force"
+            "command": "echo ''> app/Config/credentials.py"
         },
         {
             "label": "Criar pastas adicionais",
             "type": "shell",
-            "command": "New-Item -Path 'app' -Name 'assets' -ItemType 'directory' -Force; New-Item -Path 'app' -Name 'data' -ItemType 'directory' -Force"
+            "command": "mkdir app/assets; mkdir app/data"
         },
         // TEST Tasks
         {
